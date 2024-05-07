@@ -1,0 +1,13 @@
+body:has(._checkInListItem:hover) ._where {
+        border-color:transparent;
+}
+body:has(._checkOutListItem:hover) ._checkIn {
+        border-color:transparent;
+}
+body:has(._whoListItem:hover) ._checkOut {
+        border-color:transparent;
+}
+
+.searchBar {
+    transition: all .3s ease-out;
+}
