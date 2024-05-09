@@ -1,7 +1,14 @@
+import { Experience } from "../Experience";
+
 export function ExperienceGallery() {
   return (
     <>
-      <h1>Experience Gallery</h1>
+      <section className="container mx-auto grid grid-cols-4 gap-4 px-8">
+        <Experience />
+        <Experience />
+        <Experience />
+        <Experience />
+      </section>
     </>
   );
 }
