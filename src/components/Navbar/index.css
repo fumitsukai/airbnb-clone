@@ -11,3 +11,14 @@ body:has(._whoListItem:hover) ._checkOut {
 .searchBar {
     transition: all .3s ease-out;
 }
+
+.mapImg {
+    height: 6.875em;
+}
+
+.day-cell:hover {
+    background-color: red;
+}
+.button:hover {
+    background-color: red;
+}
