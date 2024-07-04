@@ -1,18 +1,17 @@
+import Carousel from "../Carousel";
+import "./index.css";
+
 export function Experience() {
   return (
     <>
-      <div className="card border border-solid">
-        <div className="imgCarousel">
-          <img
-            src="https://media-cdn.tripadvisor.com/media/vr-splice-j/06/fb/be/08.jpg"
-            className="rounded-md bg-cover m-0 p-0 h-64"
-          />
-          <p>Heart</p>
-        </div>
-        <p>Heading</p>
-        <p>Location</p>
-        <p>Host</p>
-        <p>Cost</p>
+      <div className="card max-w-96">
+        <Carousel />
+        <h4 className="font-semibold">Heading</h4>
+        <p className="font-thin">Hosted by a X</p>
+        <p className="font-thin mb-1">Date range</p>
+        <p className="font-medium">
+          £3200<span className="font-normal"> total</span>
+        </p>
       </div>
     </>
   );

@@ -8,9 +8,6 @@ module.exports = {
       lg: "976px",
       xl: "1440px",
     },
-    fontFamily: {
-      circular: "Circular",
-    },
     extend: {
       colors: {
         red: "#FF5A5F",

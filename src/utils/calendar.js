@@ -18,6 +18,5 @@ export function generateCalendar(date = startOfToday()) {
     start: startOfWeek(firstDayOfTheMonth, { weekStartsOn: 1 }),
     end: endOfWeek(lastDayOfTheMonth, { weekStartsOn: 1 }),
   });
-  console.log(days);
   return days;
 }

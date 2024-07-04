@@ -1,4 +1,4 @@
-body:has(._checkInListItem:hover) ._where {
+body:has(._checkInListItem:hover, ._checkInListItem:focus) ._where {
         border-color:transparent;
 }
 body:has(._checkOutListItem:hover) ._checkIn {

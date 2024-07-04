@@ -1,26 +1,39 @@
 import { Link } from "react-router-dom";
+import { useRef, useState, useEffect } from "react";
 import "./index.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { useState, useEffect, useRef } from "react";
-import australia from "/img/au-03.png";
-import europe from "/img/eu-c-04.png";
-import world from "/img/wrld-15.png";
-import { MapBtn } from "../MapBtn";
-import Calendar from "react-calendar";
-import { DatePicker } from "../DatePicker";
+import { FaAirbnb } from "react-icons/fa";
+import { FiGlobe } from "react-icons/fi";
+import { RxHamburgerMenu, RxAvatar } from "react-icons/rx";
+import { AccountPopup } from "../AccountPopUp";
+import { CategoryBar } from "../CategoryBar";
+import SearchBarBig from "../SearchBarBig";
+import { classNames } from "../DatePicker";
 
-export function Navbar() {
+export function Navbar({ setToggleSignUp }) {
   const form = useRef(null);
+  const accountBtn = useRef(null);
   const [search, setSearch] = useState(null);
-  const handleClick = (e) => {
-    setSearch(e.target.getAttribute("name"));
-    console.log(e.target.getAttribute("name"));
+  const [activeBtn, setActiveBtn] = useState("stays");
+  const [accountToggle, setAccountToggle] = useState(false);
+  const [scroll, setScroll] = useState(false);
+  useEffect(() => {
+    const handleVerticalScroll = () => {
+      setScroll(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleVerticalScroll);
+    return () => window.removeEventListener("scroll", handleVerticalScroll);
+  }, []);
+
+  const filterSearch = (e) => {
+    setActiveBtn(e.target.getAttribute("name"));
   };
 
   function handleOutsideClick(e) {
     if (form.current && !form.current.contains(e.target)) {
       setSearch(null);
+    }
+    if (accountBtn.current && !accountBtn.current.contains(e.target)) {
+      setAccountToggle(false);
     }
   }
   useEffect(() => {
@@ -30,99 +43,115 @@ export function Navbar() {
     };
   }, []);
 
-  function handleChange(val1, val2) {
-    console.log(val1, val2);
+  function toggleAccount() {
+    setAccountToggle(true);
   }
 
   return (
     <>
-      <nav className="flex w-full m-0 justify-between px-10 py-5 bg-white flex-wrap border-b border-gray-md border-solid">
-        <p className="float-start basis-4/12">Logo</p>
-        <ul className="flex justify-center gap-4 basis-4/12 text-gray-md mb-3">
-          <li className="active:text-black">Stays</li>
-          <li className="active:text-black">Experiences</li>
-          <li className="active:text-black">Online Experiences</li>
-        </ul>
-        <ul className="flex justify-end gap-4 basis-4/12">
-          <li>Airbnb your home</li>
-          <li>Region icon</li>
-          <li>Login</li>
-        </ul>
-        <div className="w-full flex justify-center searchBar mt-5">
-          <form ref={form}>
-            <ul className="flex justify-center rounded-full border-solid border-gray-md border shadow-lg">
-              <li
-                className="hover:bg-gray-light rounded-full ps-8"
-                name="where"
-              >
-                <div
-                  className="border-r border-solid border-gray-md pe-24 my-3  hover:border-transparent _where"
-                  onClick={handleClick}
-                  name="where"
-                >
-                  <p className="text-xs font-semibold" name="where">
-                    Where
-                  </p>
-                  <input
-                    className="text-sm focus:outline-none bg-transparent"
-                    type="text"
-                    placeholder="Search Destination"
-                    name="where"
-                  ></input>
-                </div>
-              </li>
-              <li
-                className="ps-6 hover:bg-gray-light hover:rounded-full my-0 _checkInListItem"
-                name="checkin"
-                onClick={handleClick}
-              >
-                <div
-                  className="border-r border-solid border-gray-md pe-12 my-3 hover:border-transparent _checkIn"
-                  name="checkin"
-                >
-                  <p className="text-xs font-semibold" aria-disabled>
-                    Check in
-                  </p>
-                  <p className="font-thin text-sm">Add dates</p>
-                </div>
-              </li>
-              <li className="hover:bg-gray-light hover:rounded-full my-0 ps-6 _checkOutListItem">
-                <div className="border-r border-solid border-gray-md pe-12 my-3 hover:border-transparent _checkOut">
-                  <p className="text-xs font-semibold">Check out</p>
-                  <p className="font-thin text-sm">Add dates</p>
-                </div>
-              </li>
-              <li className=" hover:bg-gray-light hover:rounded-full my-0 ps-6 _whoListItem flex justify-evenly">
-                <div className="pe-32 my-3">
-                  <p className="text-xs font-semibold">Who</p>
-                  <p className="font-thin text-sm">Add guests</p>
-                </div>
-                <button type="submit" className="bg-red rounded-full p-3 m-2">
-                  <FontAwesomeIcon
-                    icon={faSearch}
-                    className="text-gray-light px-1"
-                  ></FontAwesomeIcon>
-                </button>
-              </li>
-            </ul>
-            {search == "where" && (
-              <div className="absolute w-4/12 border bg-white rounded-3xl mt-3 shadow-lg z-50 p-4 ps-7">
-                <h4 className="font-semibold mb-3 mt-6">Search by region</h4>
-                <div className="grid grid-cols-3">
-                  <MapBtn img={world} name="I'm Flexible" />
-                  <MapBtn img={europe} name="Europe" />
-                  <MapBtn img={australia} name="Australia" />
-                </div>
-              </div>
+      <div className="sticky top-0 z-40 bg-white">
+        <nav className="flex w-full justify-between px-20 py-5 bg-white flex-wrap border-b border-gray-md border-solid">
+          <div className="float-start basis-4/12 flex items-center order-1">
+            <FaAirbnb size={38} color="#FF5A5F" className="my-auto" />
+            <p className="font-extrabold text-2xl text-red my-auto ms-1">
+              airbnb
+            </p>
+          </div>
+          <div
+            className={classNames(
+              "flex justify-center  basis-4/12 text-gray-md my-auto order-2",
+              scroll ? "hidden" : "visible"
             )}
-            {search == "checkin" && (
-              <div className="absolute w-7/12 bg-white grid grid-cols-2 h-96">
-                <DatePicker />
-              </div>
-            )}
-          </form>
-        </div>
-      </nav>
+          >
+            <div
+              className={classNames(
+                "px-4 py-3",
+                activeBtn === "stays"
+                  ? "text-black"
+                  : "rounded-full hover:bg-gray-light hover:text-gray-500"
+              )}
+            >
+              <button onClick={filterSearch} name="stays">
+                Stays
+              </button>
+            </div>
+            <div
+              className={classNames(
+                "px-4 py-3",
+                activeBtn === "experiences"
+                  ? "text-black"
+                  : "rounded-full hover:bg-gray-light hover:text-gray-500"
+              )}
+            >
+              <button
+                className="active:text-black "
+                onClick={filterSearch}
+                name="experiences"
+              >
+                Experiences
+              </button>
+            </div>
+            <div
+              className={classNames(
+                "px-4 py-3",
+                activeBtn === "onlinexp"
+                  ? "text-black"
+                  : "rounded-full hover:bg-gray-light hover:text-gray-500"
+              )}
+            >
+              <button
+                className="active:text-black "
+                onClick={filterSearch}
+                name="onlinexp"
+              >
+                Online Experiences
+              </button>
+            </div>
+          </div>
+          <div className="flex justify-end basis-4/12 my-auto order-3">
+            <div className="hover:bg-gray-light rounded-full">
+              <button className="text-sm font-semibold p-3">
+                Airbnb your home
+              </button>
+            </div>
+            <button className="hover:bg-gray-light rounded-full px-4 me-1">
+              <FiGlobe />
+            </button>
+            <div className="relative" ref={accountBtn}>
+              <button
+                className="flex rounded-full border items-center hover:shadow-md py-1"
+                onClick={toggleAccount}
+              >
+                <RxHamburgerMenu className="ms-4" />
+                <RxAvatar size={34} color="gray" className="mx-2" />
+              </button>
+              {accountToggle == true && (
+                <AccountPopup
+                  setToggleSignUp={setToggleSignUp}
+                  setAccountToggle={setAccountToggle}
+                />
+              )}
+            </div>
+          </div>
+
+          <div
+            className={`flex searchBar ${
+              scroll
+                ? "order-2 basis-4/12 w-2"
+                : "order-4 justify-center w-full mt-5"
+            }`}
+          >
+            <form ref={form}>
+              <SearchBarBig
+                search={search}
+                setSearch={setSearch}
+                scroll={scroll}
+              />
+            </form>
+          </div>
+        </nav>
+        <CategoryBar scroll={scroll} />
+      </div>
     </>
   );
 }
