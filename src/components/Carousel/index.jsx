@@ -36,7 +36,7 @@ export default function Carousel() {
         <FontAwesomeIcon
           icon={faHeart}
           fontSize={24}
-          className="right-0 m-4 hover:scale-110 transition ease-out duration-300 z-30 absolute top-0"
+          className="right-0 m-4 hover:scale-110 transition ease-out duration-300  absolute top-0"
           color="white"
         />
 

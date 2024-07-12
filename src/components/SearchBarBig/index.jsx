@@ -44,8 +44,7 @@ export default function SearchBarBig({ search, setSearch, scroll }) {
             </p>
             <input
               className={classNames(
-                "text-sm focus:outline-none bg-transparent",
-                scroll && "hidden"
+                "text-sm focus:outline-none bg-transparent"
               )}
               type="text"
               placeholder="Search Destination"
@@ -72,10 +71,7 @@ export default function SearchBarBig({ search, setSearch, scroll }) {
             <p className="text-xs font-semibold" name="checkin">
               Check in
             </p>
-            <p
-              className={classNames("font-thin text-sm", scroll && "hidden")}
-              name="checkin"
-            >
+            <p className={classNames("font-thin text-sm")} name="checkin">
               {selectedDayCheckin && format(selectedDayCheckin, "MMM dd")}
               {!selectedDayCheckin && "Add Dates"}
             </p>
@@ -99,10 +95,7 @@ export default function SearchBarBig({ search, setSearch, scroll }) {
             <p className="text-xs font-semibold" name="checkout">
               Check out
             </p>
-            <p
-              className={classNames("font-thin text-sm", scroll && "hidden")}
-              name="checkout"
-            >
+            <p className={classNames("font-thin text-sm")} name="checkout">
               {selectedDayCheckout && format(selectedDayCheckout, "MMM dd")}
               {!selectedDayCheckout && "Add Dates"}
             </p>
@@ -120,10 +113,7 @@ export default function SearchBarBig({ search, setSearch, scroll }) {
             <p className="text-xs font-semibold" name="who">
               Who
             </p>
-            <p
-              className={classNames("font-thin text-sm", scroll && "hidden")}
-              name="who"
-            >
+            <p className={classNames("font-thin text-sm")} name="who">
               Add guests
             </p>
           </div>
@@ -144,7 +134,7 @@ export default function SearchBarBig({ search, setSearch, scroll }) {
         </li>
       </ul>
       {search == "where" && (
-        <div className="absolute  border bg-white rounded-3xl mt-3 shadow-lg z-50 p-5">
+        <div className="absolute  border bg-white rounded-3xl mt-3 shadow-lg z-40 p-5">
           <h4 className="font-semibold mb-3 mt-6">Search by region</h4>
           <div className="grid grid-cols-3">
             <MapBtn img={world} name="I'm Flexible" />
@@ -154,7 +144,7 @@ export default function SearchBarBig({ search, setSearch, scroll }) {
         </div>
       )}
       {(search == "checkin" || search == "checkout") && (
-        <div className="absolute w-3/5 bg-white rounded-3xl mt-3 shadow-lg z-50 p-10 border border-solid border-gray-md">
+        <div className="absolute w-3/5 bg-white rounded-3xl mt-3 shadow-lg p-10 border border-solid border-gray-md">
           <div className="flex justify-center">
             <div className="border border-solid p-1 grid grid-cols-3 w-2/5 rounded-full bg-gray-md">
               <button className="bg-gray-light rounded-full p-1">Dates</button>
@@ -175,7 +165,7 @@ export default function SearchBarBig({ search, setSearch, scroll }) {
         </div>
       )}
       {search == "who" && (
-        <div className="absolute border bg-white rounded-3xl mt-3 shadow-lg z-50 p-4 ps-7 right-[18.5em]">
+        <div className="absolute border bg-white rounded-3xl mt-3 shadow-lg z-40 p-4 ps-7 right-[18.5em]">
           <div className="flex justify-between">
             <div className="m-5">
               <h3>Adults</h3>

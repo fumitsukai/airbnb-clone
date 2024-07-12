@@ -8,6 +8,13 @@ export function ExperienceGallery() {
         <Experience />
         <Experience />
         <Experience />
+        <Experience />
+        <Experience />
+        <Experience />
+        <Experience />
+        <Experience />
+        <Experience />
+        <Experience />
       </section>
     </>
   );
